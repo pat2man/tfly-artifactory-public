@@ -1,0 +1,9 @@
+{
+  "id": "tfly-deploy",
+  "ssh_keys": [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4BftMjYDPCgyWkpUI9vIEL9yE6PioHYmN03g4CSCOnQQNoQkC75kvp2rgCpnl1BematVERzbJ6FuoJ+ynLrJoiUSWX7fdAM6A2wBeteQ+Q1722aKP3XLHf6gg9aQ6tiOxUVEC/2sIcaRuy26NMb8tScOui3KL67callJHgXRSnnqbvU7e7iiJutQPGKx8ArUl1kw/dw32wIz+HL8HPLm52Lu1zWMJ2MNSdMHvcgvIqLWiH6Aq+SOGr7ige2D/9zXzCobaDSeYtIH0m2lECLGm6OGPmo+QXIRBRS2dbLj8+rHYehXyagi/eJ0zfOPHlBcf5R75/7ytO2SfO9lnzG9d tfly-deploy@local"
+  ],
+  "uid": 1019,
+  "gid": 1019
+}
+
