@@ -1,5 +1,5 @@
 name             'tfly-artifactory'
-maintainer       'Ticketfly, Inc.'
+maintainer       'Ticketfly LLC'
 maintainer_email 'chefcookbooks@ticketfly.com'
 license          'Apache 2.0'
 description      'Installs/Configures tfly-artifactory'
@@ -13,3 +13,4 @@ end
 supported_operating_systems.each { |os| supports os }
 
 recipe 'tfly-artifactory::default', 'Does nothing'
+depends          'docker', '~> 2.0'
