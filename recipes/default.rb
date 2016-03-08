@@ -37,7 +37,7 @@ end
 docker_container 'artifactory' do
   repo node['tfly-artifactory']['repo']
   tag node['tfly-artifactory']['version']
-  port '8081:8081'
+  port ['80:80', '8081:8081', '443:443', '5000-5002:5000-5002']
   env [
     "ARTIFACTORY_HOME=#{node['tfly-artifactory']['home']}"
   ]
