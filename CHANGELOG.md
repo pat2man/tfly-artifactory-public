@@ -1,3 +1,7 @@
+# 0.1.3
+
+Add Docker restart policy
+
 # 0.1.2
 
 Move config out of container and provide defaults from Chef
