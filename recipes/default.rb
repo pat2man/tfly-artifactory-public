@@ -24,13 +24,44 @@ end
 docker_image "#{node['tfly-artifactory']['repo']}" do
   tag node['tfly-artifactory']['version']
   action :pull
-  tls false
 end
 
-['data', 'logs', 'backup'].each do |directory_name|
+['data', 'logs', 'backup', 'etc'].each do |directory_name|
   directory "#{node['tfly-artifactory']['home']}/#{directory_name}" do
     mode '777'
     recursive true
+  end
+end
+
+template "#{node['tfly-artifactory']['home']}/etc/default" do
+  mode '666'
+end
+
+template "#{node['tfly-artifactory']['home']}/etc/artifactory.config.xml" do
+  mode '666'
+  not_if { File.exists?("#{node['tfly-artifactory']['home']}/etc/artifactory.config.latest.xml") }
+end
+
+cookbook_file "#{node['tfly-artifactory']['home']}/etc/artifactory.system.properties" do
+  mode '666'
+  action :create_if_missing
+end
+
+cookbook_file "#{node['tfly-artifactory']['home']}/etc/logback.xml" do
+  mode '666'
+  action :create_if_missing
+end
+
+cookbook_file "#{node['tfly-artifactory']['home']}/etc/mimetypes.xml" do
+  mode '666'
+  action :create_if_missing
+end
+
+if ! node['tfly-artifactory']['license'].nil?
+  file "#{node['tfly-artifactory']['home']}/etc/artifactory.lic" do
+    content node['tfly-artifactory']['license']
+    mode '666'
+    action :create_if_missing
   end
 end
 
@@ -44,6 +75,7 @@ docker_container 'artifactory' do
   volumes [
     "#{node['tfly-artifactory']['home']}/data:#{node['tfly-artifactory']['home']}/data",
     "#{node['tfly-artifactory']['home']}/logs:#{node['tfly-artifactory']['home']}/logs",
+    "#{node['tfly-artifactory']['home']}/etc:#{node['tfly-artifactory']['home']}/etc",
     "#{node['tfly-artifactory']['home']}/backup:#{node['tfly-artifactory']['home']}/backup"
   ]
 end

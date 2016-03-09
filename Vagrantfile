@@ -14,12 +14,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = "tfly-artifactory-berkshelf"
 
   # Set the version of chef to install using the vagrant-omnibus plugin
-  config.omnibus.chef_version = :latest
+  # config.omnibus.chef_version = :latest
 
   # Every Vagrant virtual environment requires a box to build off of.
   # If this value is a shorthand to a box in Vagrant Cloud then
   # config.vm.box_url doesn't need to be specified.
-  config.vm.box = "chef/ubuntu-12.04"
+  config.vm.box = "bento/ubuntu-12.04"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # is not a Vagrant Cloud box and if it doesn't already exist on the
@@ -36,6 +36,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   config.vm.network "forwarded_port", guest: 8081, host: 8081
+  config.vm.network "forwarded_port", guest: 5001, host: 5001
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -73,14 +74,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # to skip installing and copying to Vagrant's shelf.
   # config.berkshelf.except = []
 
-  config.chef_zero.enabled = true
+  ##config.chef_zero.enabled = true
   ##config.chef_zero.nodes = "../foobar/nodes"
   ##config.chef_zero.environments = "../foobar/environments"
-  config.chef_zero.data_bags = "./test/data_bags"
+  ##config.chef_zero.data_bags = "./test/data_bags"
   ##config.chef_zero.roles = "../foobar/roles"
   ##config.chef_zero.cookbooks = "."
 
-  config.vm.provision :chef_client do |chef|
+  config.vm.provision :chef_solo do |chef|
     chef.json = {
     }
     chef.run_list = [
