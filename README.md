@@ -12,9 +12,7 @@ Requirements
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
 
-e.g.
 #### tfly-artifactory::default
 <table>
   <tr>
@@ -26,7 +24,7 @@ e.g.
   <tr>
     <td><tt>['tfly-artifactory']['version']</tt></td>
     <td>String</td>
-    <td>version of Artifactory to install</td>
+    <td>Version of Artifactory to install</td>
     <td><tt>4.5.2</tt></td>
   </tr>
   <tr>
@@ -34,6 +32,24 @@ e.g.
     <td>String</td>
     <td>Artifactory repo to use</td>
     <td><tt>docker-reg2.bintray.io/jfrog/artifactory-pro</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['tfly-artifactory']['license']</tt></td>
+    <td>String</td>
+    <td>Artifactory PRO License</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><tt>['tfly-artifactory']['oauth']['google']['id']</tt></td>
+    <td>String</td>
+    <td>Google OAuth client ID</td>
+    <td></td>
+  </tr>
+  <tr>
+  <td><tt>['tfly-artifactory']['oauth']['google']['secret']</tt></td>
+    <td>String</td>
+    <td>Google OAuth client secret</td>
+    <td></td>
   </tr>
 </table>
 
@@ -45,7 +61,7 @@ Just include `tfly-artifactory` in your node's `run_list`:
 
 ```json
 {
-  "name":"my_node",
+  "name":"artifactory-node",
   "run_list": [
     "recipe[tfly-artifactory]"
   ]

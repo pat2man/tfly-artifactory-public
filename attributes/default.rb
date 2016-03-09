@@ -20,3 +20,5 @@
 default['tfly-artifactory']['version'] = "4.5.2"
 default['tfly-artifactory']['repo'] = "jfrog-docker-reg2.bintray.io/jfrog/artifactory-registry"
 default['tfly-artifactory']['home'] = "/var/opt/jfrog/artifactory"
+default['tfly-artifactory']['java-options'] = "-server -Xms512m -Xmx2g -Xss256k -XX:+UseG1GC"
+default['tfly-artifactory']['anonymous-access-enabled'] = "false"
