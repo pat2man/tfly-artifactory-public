@@ -1,3 +1,7 @@
+# 0.1.4
+
+Fix port mapping for Docker
+
 # 0.1.3
 
 Add Docker restart policy
