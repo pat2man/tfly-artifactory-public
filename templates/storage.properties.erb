@@ -1,0 +1,27 @@
+<% if node['tfly-artifactory']['mysql'].nil? %>
+type=derby
+url=jdbc:derby:{db.home};create=true
+driver=org.apache.derby.jdbc.EmbeddedDriver
+<% else %>
+type=mysql
+driver=com.mysql.jdbc.Driver
+url=jdbc:<%= node['tfly-artifactory']['mysql']['url'] %> ## mysql://localhost:3306/artdb
+username=<%= node['tfly-artifactory']['mysql']['username'] %>
+password=<%= node['tfly-artifactory']['mysql']['password'] %>
+<% end %>
+
+## Determines where the actual artifacts binaries are stored. Available options:
+## filesystem - binaries are stored in the filesystem (recommended, default)
+## fullDb     - binaries are stored as blobs in the db, filesystem is used for caching
+## cachedFS   - binaries are stored in the filesystem, but a front cache (with faster access) is added
+## IMPORTANT NOTE: This property should not be change after the initial setup. To change binaries storage you have to export and import
+#binary.provider.type=filesystem
+<% if ! node['tfly-artifactory']['s3'].nil? %>
+binary.provider.type=s3
+binary.provider.s3.identity=<%= node['tfly-artifactory']['s3']['identity'] %>
+binary.provider.s3.credential=<%= node['tfly-artifactory']['s3']['credential'] %>
+binary.provider.s3.endpoint=<%= node['tfly-artifactory']['s3']['endpoint'] %>
+binary.provider.s3.bucket.name=<%= node['tfly-artifactory']['s3']['bucket-name'] %>
+<% end %>
+## Determines the maximum filesystem cache size in bytes when using binary provider type fullDb or cachedFS. Default is 5GB
+## Supported units are TB (terabytes), GB (gigabytes), MB (megabytes) and KB (kilobytes)

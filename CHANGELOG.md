@@ -1,3 +1,8 @@
+# 0.2.0
+
+Add configuration options for MySQL and S3
+Change default image to ticketfly/artifactory-registry which contains MySQL
+
 # 0.1.4
 
 Fix port mapping for Docker
