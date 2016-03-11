@@ -65,6 +65,25 @@ if ! node['tfly-artifactory']['license'].nil?
   end
 end
 
+## nginx config
+
+directory "/etc/nginx/conf.d" do
+  mode '777'
+  recursive true
+end
+
+template "/etc/nginx/conf.d/default.conf" do
+  mode '666'
+end
+
+['fastcgi_params',  'koi-utf',  'koi-win',  'mime.types',  'nginx.conf',  'scgi_params',  'uwsgi_params',  'win-utf'].each do |nginx_file|
+  cookbook_file "/etc/nginx/#{nginx_file}" do
+    source "nginx/#{nginx_file}"
+    mode '666'
+    action :create_if_missing
+  end
+end
+
 docker_container 'artifactory' do
   repo node['tfly-artifactory']['repo']
   tag node['tfly-artifactory']['version']
@@ -77,6 +96,7 @@ docker_container 'artifactory' do
     "#{node['tfly-artifactory']['home']}/data:#{node['tfly-artifactory']['home']}/data",
     "#{node['tfly-artifactory']['home']}/logs:#{node['tfly-artifactory']['home']}/logs",
     "#{node['tfly-artifactory']['home']}/etc:#{node['tfly-artifactory']['home']}/etc",
-    "#{node['tfly-artifactory']['home']}/backup:#{node['tfly-artifactory']['home']}/backup"
+    "#{node['tfly-artifactory']['home']}/backup:#{node['tfly-artifactory']['home']}/backup",
+    "/etc/nginx:/etc/nginx"
   ]
 end
