@@ -1,3 +1,8 @@
+# 0.2.1
+
+Bug fixes for storage.properties template
+Restart container when modifying templates
+
 # 0.2.0
 
 Add configuration options for MySQL and S3

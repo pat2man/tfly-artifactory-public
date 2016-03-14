@@ -35,10 +35,17 @@ end
 
 template "#{node['tfly-artifactory']['home']}/etc/default" do
   mode '666'
+  notifies :restart, 'docker_container[artifactory]', :delayed
+end
+
+template "#{node['tfly-artifactory']['home']}/etc/storage.properties" do
+  mode '666'
+  notifies :restart, 'docker_container[artifactory]', :delayed
 end
 
 template "#{node['tfly-artifactory']['home']}/etc/artifactory.config.xml" do
   mode '666'
+  notifies :restart, 'docker_container[artifactory]', :delayed
   not_if { File.exists?("#{node['tfly-artifactory']['home']}/etc/artifactory.config.latest.xml") }
 end
 
@@ -74,6 +81,7 @@ end
 
 template "/etc/nginx/conf.d/default.conf" do
   mode '666'
+  notifies :restart, 'docker_container[artifactory]', :delayed
 end
 
 ['fastcgi_params',  'koi-utf',  'koi-win',  'mime.types',  'nginx.conf',  'scgi_params',  'uwsgi_params',  'win-utf'].each do |nginx_file|
