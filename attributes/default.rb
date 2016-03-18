@@ -17,12 +17,12 @@
 # limitations under the License.
 #
 
-default['tfly-artifactory']['version'] = "4.5.2"
+default['tfly-artifactory']['version'] = "4.6.0"
 default['tfly-artifactory']['repo'] = "ticketfly/artifactory-registry"
 default['tfly-artifactory']['home'] = "/var/opt/jfrog/artifactory"
 default['tfly-artifactory']['java-options'] = "-server -Xms512m -Xmx2g -Xss256k -XX:+UseG1GC"
 default['tfly-artifactory']['anonymous-access-enabled'] = "false"
 default['tfly-artifactory']['docker-host-mapping'] = {
-  "docker-dev.ticketfly-dev.com" => "docker-dev-local",
-  "docker.ticketfly-dev.com" => "docker-prod-local"
+  "dev-docker.us-west-2.tfly-internal.com" => "docker-dev-local",
+  "docker.us-west-2.tfly-internal.com" => "docker-prod-local"
 }

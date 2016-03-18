@@ -1,3 +1,7 @@
+# 0.2.2
+
+Bug fix where restarting the docker image was timing out in Scalr
+
 # 0.2.1
 
 Bug fixes for storage.properties template
